@@ -24,3 +24,10 @@ jobs:
           projectId: ${{ env.FIREBASE_PROJECT_ID }}
           target: ${{ env.FIREBASE_HOSTING_TARGET }}
           expires: 7d
+
+      - name: Send Discord notification
+        run: |
+          LAST_COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          curl -s -X POST -H "Content-Type: application/json" \
+            -d "{\"content\": \" 🎸 [Ani Flowers](https://ani-flowers.store) deployed! Commit: **$LAST_COMMIT_MESSAGE**\"}" \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}
