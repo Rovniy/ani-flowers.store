@@ -29,12 +29,12 @@ from `refs/` (needs Python with Pillow).
 
 ## Hosting
 
-Firebase project `divarogue-e7d19`, hosting target `ani-flowers` → site `ani-flowers-store`.
+Firebase project `divarogue-e7d19`, hosting target `ani-flowers` → site `ani-flowers`.
 One-time setup before the first deploy:
 
 ```bash
-firebase hosting:sites:create ani-flowers-store
-firebase target:apply hosting ani-flowers ani-flowers-store
+firebase hosting:sites:create ani-flowers
+firebase target:apply hosting ani-flowers ani-flowers
 ```
 
 Then connect `ani-flowers.store` in the Firebase console (Hosting → Add custom domain).
