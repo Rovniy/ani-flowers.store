@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "divarogue-e7d19"
+  },
+  "targets": {
+    "divarogue-e7d19": {
+      "hosting": {
+        "ani-flowers": [
+          "ani-flowers-store"
+        ]
+      }
+    }
+  }
+}

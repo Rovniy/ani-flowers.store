@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+/* Colours are lifted from the logo: the olive of the lettering and the peach
+   of the petals, set on warm paper. Nothing saturated, nothing pure white. */
+@theme {
+  --color-cream: #F7F0E6;
+  --color-paper: #FCF8F2;
+  --color-linen: #EFE4D5;
+  --color-olive: #4F5A2A;
+  --color-olive-deep: #39411E;
+  --color-ink: #3D362E;
+  --color-muted: #6E6254;
+  --color-peach: #E3A68F;
+  --color-peach-soft: #F3D9CD;
+
+  --font-display: "Cormorant Garamond", ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: "Nunito", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --ease-soft: cubic-bezier(.22, .61, .36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /* A modal <dialog> does not stop the page behind it from scrolling. */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+    min-height: 100svh;
+    /* Paper tooth: faint fractal noise so the cream reads as stock, not a flat fill. */
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .24 0 0 0 0 .2 0 0 0 0 .16 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+      radial-gradient(60rem 40rem at 100% 0%, rgb(243 217 205 / .55), transparent 70%),
+      radial-gradient(50rem 36rem at 0% 100%, rgb(79 90 42 / .07), transparent 70%);
+    background-attachment: scroll;
+  }
+
+  ::selection {
+    background: var(--color-peach-soft);
+    color: var(--color-olive-deep);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-olive);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+  /* Every language variant sits in the same grid cell, so the box is always
+     as big as the longest one and nothing around it moves when it changes. */
+  .rotator {
+    display: inline-grid;
+
+    & > span {
+      grid-area: 1 / 1;
+      transition: opacity .7s var(--ease-soft), transform .7s var(--ease-soft), filter .7s var(--ease-soft);
+    }
+
+    & > span[aria-hidden="true"] {
+      opacity: 0;
+      transform: translateY(.3em);
+      filter: blur(3px);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      & > span {
+        transition: opacity .2s linear;
+        transform: none !important;
+        filter: none !important;
+      }
+    }
+  }
+
+  .eyebrow {
+    @apply font-sans text-[11px] font-bold uppercase tracking-[.22em] text-olive/80;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2.5 rounded-full px-6 py-3.5 text-[15px] font-semibold leading-none no-underline;
+    transition: background-color .3s var(--ease-soft), color .3s var(--ease-soft), border-color .3s var(--ease-soft), transform .3s var(--ease-soft), box-shadow .3s var(--ease-soft);
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+  }
+
+  .btn-primary {
+    @apply bg-olive text-cream shadow-[0_8px_24px_-12px_rgb(57_65_30/.6)];
+
+    &:hover {
+      @apply bg-olive-deep;
+    }
+  }
+
+  .btn-ghost {
+    @apply border border-olive/30 bg-paper/60 text-olive-deep;
+
+    &:hover {
+      @apply border-olive/60 bg-paper;
+    }
+  }
+
+  .link {
+    @apply text-olive-deep underline decoration-peach decoration-2 underline-offset-4;
+    transition: text-decoration-color .3s var(--ease-soft);
+
+    &:hover {
+      @apply decoration-olive;
+    }
+  }
+}

@@ -1,0 +1,6 @@
+# https://ani-flowers.store
+
+User-agent: *
+Allow: /
+
+Sitemap: https://ani-flowers.store/sitemap.xml

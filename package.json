@@ -1,0 +1,24 @@
+{
+  "name": "ani-flowers-store",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev -o",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "deploy": "npm run generate && firebase deploy --only hosting:ani-flowers",
+    "deploy:preview": "npm run generate && firebase hosting:channel:deploy preview --only ani-flowers --expires 7d",
+    "typecheck": "nuxt typecheck",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxt/fonts": "0.14.0",
+    "@nuxt/image": "2.1.0",
+    "@tailwindcss/vite": "4.3.3",
+    "nuxt": "4.5.2",
+    "tailwindcss": "4.3.3",
+    "typescript": "6.0.3",
+    "vue-tsc": "3.3.12"
+  }
+}
